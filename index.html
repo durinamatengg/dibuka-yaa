@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<!-- saved from url=(0078)file:///C:/Users/ASUS%20TUF%20A15/Downloads/software/apayee-project/page1.html -->
+<html lang="id"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>buat kamu dari karinaa imoett</title>
+    <style>
+        body {
+            font-family: 'Times New Roman';
+            text-align: center;
+            background-color: #d7bce3;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        h1 {
+            color: #b247ff;
+            margin: 0 0 8px 0;
+            font-size: 2.2rem;
+        }
+        p {
+            max-width: 700px;
+            margin: 0 0 18px 0;
+            line-height: 1.3;
+        }
+        input {
+            padding: 16px;
+            font-size: 16px;
+            width: 500px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            transition: border-color .2s, box-shadow .2s;
+            text-align: center;
+        }
+        input:focus {
+            border-color: #b247ff;
+            box-shadow: 0 0 6px rgba(178,71,255,0.15);
+        }
+        button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #b247ff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            opacity: 1;
+            transition: transform .08s ease, box-shadow .12s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        }
+        button:active {
+            transform: translateY(1px);
+        }
+        .error {
+            color: red;
+            margin-top: 30px;
+            display: none;
+            font-weight: bold;
+        }
+        .shake {
+            animation: shake 0.35s;
+        }
+        @keyframes shake {
+            0% { transform: translateX(0px); }
+            20% { transform: translateX(-6px); }
+            40% { transform: translateX(6px); }
+            60% { transform: translateX(-4px); }
+            80% { transform: translateX(4px); }
+            100% { transform: translateX(0px); }
+        }
+        @media (max-width: 600px) {
+            input { width: calc(100% - 40px); }
+            p { padding: 0 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Hai, Dear! Aku Karina!</h1>
+    <p>tuliskan nama lengkapmu dengan huruf kapital di awal setiap kata ya! aku tau loh kamu siapa xixixi, jadi tulis yang benar!!!!</p>
+
+    <input type="text" id="nameInput" placeholder="Masukkan nama lengkapmu...">
+    <button id="nextBtn">Next</button>
+    <p class="error" id="errorMsg">JANGAN SALAH!!😠</p>
+
+    <script>
+        const correctName = "Mohammad Duta Ramadhani";
+
+        const nameInput = document.getElementById("nameInput");
+        const nextBtn = document.getElementById("nextBtn");
+        const errorMsg = document.getElementById("errorMsg");
+
+        nextBtn.addEventListener("click", () => {
+            const value = nameInput.value.trim();
+
+            if (value === correctName) {
+                errorMsg.style.display = "none";
+
+                localStorage.setItem("name", value);
+
+                setTimeout(() => {
+                    window.location.href = "page2.html";
+                }, 500);
+            } else {
+                // ❌ Jika salah
+                errorMsg.style.display = "block";
+                nameInput.classList.remove("shake");
+                void nameInput.offsetWidth;
+                nameInput.classList.add("shake");
+            }
+        });
+
+        nameInput.addEventListener("input", () => {
+            if (errorMsg.style.display === "block") {
+                errorMsg.style.display = "none";
+            }
+        });
+
+        nameInput.focus();
+    </script>
+
+
+
+</body></html>
