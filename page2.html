@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>buat kamu dari karinaa imoett</title>
+  <style>
+    body {
+      font-family: 'Times New Roman';
+      text-align: center;
+      background-color: #d7bce3;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    h1 {
+      color: #b247ff;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 18px;
+      margin-bottom: 25px;
+    }
+
+    label {
+      display: block;
+      font-size: 18px;
+      margin-top: 10px;
+    }
+
+    input, select {
+      padding: 10px;
+      font-size: 16px;
+      border: 2px solid #ccc;
+      border-radius: 5px;
+      outline: none;
+      width: 250px;
+      text-align: center;
+    }
+
+    input:focus, select:focus {
+      border-color: #b247ff;
+    }
+
+    button {
+      margin-top: 25px;
+      padding: 10px 25px;
+      font-size: 16px;
+      background-color: #b247ff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      opacity: 0.5;
+      cursor: not-allowed;
+      transition: 0.3s;
+    }
+
+    button.enabled {
+      opacity: 1;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(178, 71, 255, 0.6);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    div {
+      animation: fadeIn 1s ease-in-out;
+    }
+  </style>
+</head>
+<body>
+
+  <div>
+    <h1>Yeay kamu emang yang paling ngerti apa mauku❤️</h1>
+    <p>Sekarang kamu lengkapi ini yaa. . .</p>
+
+    <label for="birthday">Tanggal Lahir:</label>
+    <input type="date" id="birthday">
+
+    <label for="color">Pilih satu warna favoritmu:</label>
+    <select id="color">
+      <option value="">-- pilih warna --</option>
+      <option value="black">Hitam</option>
+      <option value="white">Putih</option>
+      <option value="blue">Biru</option>
+    </select>
+
+    <br>
+    <button id="nextBtn" disabled>Next</button>
+  </div>
+
+  <script>
+    const birthdayInput = document.getElementById("birthday");
+    const colorSelect = document.getElementById("color");
+    const nextBtn = document.getElementById("nextBtn");
+
+    function checkInputs() {
+      if (birthdayInput.value && colorSelect.value) {
+        nextBtn.disabled = false;
+        nextBtn.classList.add("enabled");
+      } else {
+        nextBtn.disabled = true;
+        nextBtn.classList.remove("enabled");
+      }
+    }
+
+    birthdayInput.addEventListener("input", checkInputs);
+    colorSelect.addEventListener("change", checkInputs);
+
+    nextBtn.addEventListener("click", () => {
+      const birthday = birthdayInput.value;
+      const color = colorSelect.value;
+      localStorage.setItem("birthday", birthday);
+      localStorage.setItem("favColor", color);
+      window.location.href = "page3.html";
+    });
+  </script>
+
+</body>
+</html>

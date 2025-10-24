@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>buat kamu dari karinaa imoett</title>
+  <style>
+    body {
+      font-family: 'Times New Roman';
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      transition: background 1s ease;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 15px;
+      animation: fadeIn 1.5s ease;
+    }
+
+    p {
+      font-size: 20px;
+      margin-bottom: 15px;
+      max-width: 600px;
+      line-height: 1.6;
+      animation: fadeIn 2s ease;
+    }
+
+    /* 🎁 Efek kado menyala & bergetar lembut */
+    .gift {
+      width: 180px;
+      cursor: pointer;
+      animation: bounce 2s infinite ease-in-out, pulseGlow 2s infinite alternate;
+      transition: transform 0.6s ease, filter 0.6s ease;
+      filter: drop-shadow(0 0 15px rgba(255,255,255,0.4))
+              drop-shadow(0 0 30px rgba(255, 150, 255, 0.4))
+              drop-shadow(0 0 50px rgba(255, 100, 255, 0.3));
+    }
+
+    /* Efek glow berdenyut halus */
+    @keyframes pulseGlow {
+      0% {
+        filter: drop-shadow(0 0 10px rgba(255,255,255,0.3))
+                drop-shadow(0 0 20px rgba(255,150,255,0.2));
+      }
+      100% {
+        filter: drop-shadow(0 0 20px rgba(255,255,255,0.7))
+                drop-shadow(0 0 40px rgba(255,180,255,0.5))
+                drop-shadow(0 0 60px rgba(255,120,255,0.4));
+      }
+    }
+
+    /* Efek getar halus */
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .hint {
+      color: #360946;
+      font-style: bold;
+      animation: fadeIn 3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Efek zoom besar pas diklik */
+    .zoom {
+      transform: scale(2.3) rotate(10deg);
+      filter: drop-shadow(0 0 80px rgba(255,255,255,1))
+              drop-shadow(0 0 100px rgba(255, 200, 255, 0.9));
+      animation: none; /* hentikan getaran */
+    }
+  </style>
+</head>
+<body>
+
+  <audio id="birthdaySong" autoplay loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_aa2df42e8f.mp3?filename=happy-birthday-122414.mp3" type="audio/mpeg">
+  </audio>
+
+  <h1 id="title"></h1>
+  <p id="message"></p>
+  <p class="hint">INI KADO BUAT KAMU, SILAHKAN DIKLIK YA🎁</p>
+  <img id="giftBox" class="gift" src="kotakmerah.png" alt="Kado ulang tahun">
+
+  <script>
+  // Ambil data dari localStorage
+  const name = localStorage.getItem("name") || "Dear";
+  const birthday = localStorage.getItem("birthday");
+  const color = localStorage.getItem("favColor");
+  const nickname = localStorage.getItem("nickname") || "Kamu";
+
+  const title = document.getElementById("title");
+  const message = document.getElementById("message");
+  const giftBox = document.getElementById("giftBox");
+  const song = document.getElementById("birthdaySong");
+
+  // Hitung umur berdasarkan tanggal lahir
+  const birthDate = new Date(birthday);
+  const today = new Date();
+  let age = today.getFullYear() - birthDate.getFullYear();
+  const m = today.getMonth() - birthDate.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+    age--;
+  }
+
+  // Atur background sesuai warna favorit
+  if (color === "black") {
+    document.body.style.background = "linear-gradient(135deg, #2b2b2b, #6a0dad)";
+    document.body.style.color = "white";
+  } else if (color === "white") {
+    document.body.style.background = "linear-gradient(135deg, #ffffff, #f5e6ff, #ffd6f9)";
+    document.body.style.color = "#4b0082";
+  } else if (color === "blue") {
+    document.body.style.background = "linear-gradient(135deg, #89CFF0, #b19cd9)";
+    document.body.style.color = "white";
+  } else {
+    document.body.style.background = "#d7bce3";
+  }
+
+  // Tampilkan teks ucapan
+  title.textContent = `Selamat ulang tahun yang ke-${age}, ${nickname}! 🎉`;
+  message.innerHTML = `
+    Banyak do'a yang mau ku sampaikan untuk kamu, tapi yang jelas aku ingin kamu sehat selalu, lancar rezekinya, dipermudah segala urusanmu, dan selalu dikelilingi oleh orang-orang baik dan hebat, karena kamu juga salah satu orang yang baik dan hebat. Wish u all the best, ${nickname} yang terbaikk!!!❤️<br><br>
+    <i>Do'a selengkapnya nanti hubungi aku di WA ya ${nickname}...</i>
+  `;
+
+  // Jalankan musik & efek saat kado diklik
+  giftBox.addEventListener("click", () => {
+  song.play();
+  // simpan posisi lagu saat ini
+  localStorage.setItem("songTime", song.currentTime);
+  giftBox.classList.add("zoom");
+  setTimeout(() => {
+    window.location.href = "page5.html";
+  }, 1500);
+});
+</script>
+
+</body>
+</html>

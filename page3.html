@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>buat kamu dari karinaa imoett</title>
+  <style>
+    body {
+      font-family: 'Times New Roman';
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: white;
+      transition: background 1s ease;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+      font-size: 28px;
+    }
+
+    p {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    input {
+      padding: 10px;
+      font-size: 16px;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      outline: none;
+      width: 300px;
+      text-align: center;
+      transition: 0.3s;
+    }
+
+    input:focus {
+      border-color: #b247ff;
+    }
+
+    button {
+      margin-top: 25px;
+      padding: 10px 25px;
+      font-size: 16px;
+      background-color: #b247ff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      opacity: 0.5;
+      cursor: not-allowed;
+      transition: 0.3s;
+    }
+
+    button.enabled {
+      opacity: 1;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(178, 71, 255, 0.6);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    div {
+      animation: fadeIn 1s ease-in-out;
+    }
+  </style>
+</head>
+<body>
+
+  <div>
+    <h1 id="greeting">Terima kasih...</h1>
+    <p>Tuliskan nama yang kamu ingin ku sebutkan kalau memanggilmu 💬</p>
+    <input type="text" id="nicknameInput" placeholder="Masukkan nama panggilanmu...">
+    <br>
+    <button id="nextBtn" disabled>Next</button>
+  </div>
+
+  <script>
+    // Ambil data dari halaman sebelumnya
+    const name = localStorage.getItem("name") || "Dear";
+    const color = localStorage.getItem("favColor");
+
+    const greeting = document.getElementById("greeting");
+    const nicknameInput = document.getElementById("nicknameInput");
+    const nextBtn = document.getElementById("nextBtn");
+
+    // Tampilkan sapaan dengan nama dari halaman 1
+    greeting.textContent = `Terima kasih ${name}...❤️`;
+
+    // Tentukan background sesuai warna favorit
+    if (color === "black") {
+      document.body.style.background = "linear-gradient(135deg, #2b2b2b, #6a0dad)";
+      document.body.style.color = "white";
+    } else if (color === "white") {
+      document.body.style.background = "linear-gradient(135deg, #ffffff, #f5e6ff, #ffd6f9)";
+      document.body.style.color = "#4b0082";
+    } else if (color === "blue") {
+      document.body.style.background = "linear-gradient(135deg, #89CFF0, #b19cd9)";
+      document.body.style.color = "white";
+    } else {
+      document.body.style.background = "#d7bce3";
+    }
+
+    // Cek input agar tombol aktif
+    nicknameInput.addEventListener("input", () => {
+      if (nicknameInput.value.trim() !== "") {
+        nextBtn.disabled = false;
+        nextBtn.classList.add("enabled");
+      } else {
+        nextBtn.disabled = true;
+        nextBtn.classList.remove("enabled");
+      }
+    });
+
+    // Simpan nama panggilan dan lanjut ke halaman berikut
+    nextBtn.addEventListener("click", () => {
+      localStorage.setItem("nickname", nicknameInput.value.trim());
+      window.location.href = "page4.html";
+    });
+  </script>
+
+</body>
+</html>

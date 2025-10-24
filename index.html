@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<!-- saved from url=(0078)file:///C:/Users/ASUS%20TUF%20A15/Downloads/software/apayee-project/page1.html -->
-<html lang="id"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>buat kamu dari karinaa imoett</title>
     <style>
         body {
@@ -101,8 +101,10 @@
             if (value === correctName) {
                 errorMsg.style.display = "none";
 
+                // ✅ Simpan nama ke localStorage agar bisa dipakai di halaman lain
                 localStorage.setItem("name", value);
 
+                // Sedikit delay biar lebih halus
                 setTimeout(() => {
                     window.location.href = "page2.html";
                 }, 500);
@@ -110,11 +112,12 @@
                 // ❌ Jika salah
                 errorMsg.style.display = "block";
                 nameInput.classList.remove("shake");
-                void nameInput.offsetWidth;
+                void nameInput.offsetWidth; // supaya animasi bisa diulang
                 nameInput.classList.add("shake");
             }
         });
 
+        // Hilangkan pesan error saat mulai mengetik ulang
         nameInput.addEventListener("input", () => {
             if (errorMsg.style.display === "block") {
                 errorMsg.style.display = "none";
@@ -124,6 +127,5 @@
         nameInput.focus();
     </script>
 
-
-
-</body></html>
+</body>
+</html>
